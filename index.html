@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presente Misterioso</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://images.unsplash.com/photo-1601084881623-cd36b0a7b8f5') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      height: 500px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: red;
+      border: none;
+      color: white;
+      font-size: 1.3em;
+      padding: 15px 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+
+    #mensagem, #mensagemExtra, #botaoExtra {
+      display: none;
+    }
+
+    .mensagem {
+      font-size: 1.2em;
+      margin-top: 30px;
+      line-height: 1.6;
+      animation: fadeIn 1s ease-in;
+    }
+
+    #botaoExtra {
+      position: static;
+      margin-top: 30px;
+      background-color: orange;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Presente Misterioso 🎁</h1>
+    <button id="botao" onclick="mostrarMensagem()">REVELAR PRESENTE</button>
+
+    <div id="mensagem" class="mensagem">
+      <p>Você achou que era só um presente qualquer... mas na verdade, o presente sou eu aqui, dizendo o quanto você é especial. 💖</p>
+      <p>Te escolhi não por acaso, mas porque meu coração encontrou no seu um lar. Gosto muito de você! 💌</p>
+    </div>
+
+    <button id="botaoExtra" onclick="mostrarMensagemExtra()">Não aperte aqui</button>
+
+    <div id="mensagemExtra" class="mensagem">
+      <p>Eii, não se esqueça que temos que sair hein kkkk 😜</p>
+      <p>Tenho outro presente misterioso aguardando... só pra você!! 🎁💘</p>
+    </div>
+  </div>
+
+  <script>
+    const botao = document.getElementById("botao");
+    const botaoExtra = document.getElementById("botaoExtra");
+    const mensagem = document.getElementById("mensagem");
+    const mensagemExtra = document.getElementById("mensagemExtra");
+    const container = document.querySelector(".container");
+
+    let fugindo = true;
+    let tentativas = 0;
+
+    botao.addEventListener("mouseover", () => {
+      if (fugindo && tentativas < 5) {
+        const maxX = container.clientWidth - botao.clientWidth;
+        const maxY = container.clientHeight - botao.clientHeight;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        botao.style.left = `${randomX}px`;
+        botao.style.top = `${randomY}px`;
+
+        tentativas++;
+      } else if (tentativas >= 5) {
+        fugindo = false;
+      }
+    });
+
+    function mostrarMensagem() {
+      botao.style.display = "none";
+      mensagem.style.display = "block";
+      botaoExtra.style.display = "inline-block";
+    }
+
+    function mostrarMensagemExtra() {
+      botaoExtra.style.display = "none";
+      mensagemExtra.style.display = "block";
+    }
+  </script>
+</body>
+</html>
